@@ -3,10 +3,11 @@ services:
     build: .
     environment:
       - PYTHONUNBUFFERED=1
+      - FLASK_DEBUG=1
     volumes:
       - .:/app
     ports:
-      - "5000:5000"
+      - "5001:5000"
     networks:
       - labo03-network
     depends_on:
@@ -26,7 +27,7 @@ services:
     networks:
       - labo03-network
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./db-init:/docker-entrypoint-initdb.d
@@ -42,8 +43,6 @@ services:
     restart: unless-stopped
     networks:
       - labo03-network
-    ports:
-      - "6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 1m

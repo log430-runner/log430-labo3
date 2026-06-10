@@ -54,6 +54,18 @@ CREATE TABLE stocks (
 );
 */
 
+CREATE TABLE IF NOT EXISTS `labo03_db`.`stocks` (
+  `product_id` INT NOT NULL,
+  `quantity` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`product_id`),
+  CONSTRAINT `stoks_ibfk_1`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `labo03_db`.`products` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 -- Mock data: users
 INSERT INTO users (name, email) VALUES
 ('Ada Lovelace', 'alovelace@example.com'),

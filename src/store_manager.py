@@ -12,6 +12,8 @@ from stocks.controllers.product_controller import create_product, remove_product
 from stocks.controllers.stock_controller import get_stock, set_stock, get_stock_overview
  
 app = Flask(__name__)
+app.config['PROPAGATE_EXCEPTIONS'] = True
+app.config['TESTING'] = True
 
 @app.get('/health-check')
 def health():
