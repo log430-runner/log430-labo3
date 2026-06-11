@@ -22,11 +22,9 @@ def test_health(client):
 def test_stock_flow(client):
     # 1. Créez un article (`POST /products`)
     product_data = {'name': 'Some Item', 'sku': '12345', 'price': 99.90}
-    print("DEBUG: AVANT LE POST", flush=True)
     response = client.post('/products',
                           data=json.dumps(product_data),
                           content_type='application/json')
-    print(f"DEBUG: STATUS CODE {response.status_code}", flush=True)
     
     assert response.status_code == 201
     data = response.get_json()

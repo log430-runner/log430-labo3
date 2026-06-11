@@ -101,6 +101,8 @@ def graphql_supplier():
     data = request.get_json()
     schema = Schema(query=Query)
     result = schema.execute(data['query'], variables=data.get('variables'))
+    print('heeeeellooooooo')
+    print("*****************!!!!!!!!!!!!!", result.data)
     return jsonify({
         'data': result.data,
         'errors': [str(e) for e in result.errors] if result.errors else None

@@ -4,7 +4,7 @@ SPDX - License - Identifier: LGPL - 3.0 - or -later
 Auteurs : Gabriel C. Ullmann, Fabio Petrillo, 2025
 """
 
-import traceback
+from flask import jsonify
 from stocks.queries.read_stock import get_stock_by_id, get_stock_for_all_products
 from stocks.commands.write_stock import set_stock_for_product
 
