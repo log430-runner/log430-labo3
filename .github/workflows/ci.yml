@@ -33,3 +33,31 @@ jobs:
       - name: Run tests
         working-directory: src
         run: echo "Call pytest command here!"
+
+  deploy:
+    needs: test
+    runs-on: self-hosted
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Creer fichier .env
+        run: |
+          cat > .env <<EOF
+          DB_HOST=mysql
+          DB_PORT=3306
+          DB_NAME=labo03_db
+          DB_USER=labo03
+          DB_PASSWORD=labo03
+          REDIS_HOST=redis
+          REDIS_PORT=6379
+          REDIS_DB=0
+          EOF
+
+      - name: Deployer les conteneurs
+        run: |
+          docker network create labo03-network || true
+          docker compose up -d --build
+
+      - name: Tests dans le conteneur
+        run: docker compose exec -T store_manager pytest
